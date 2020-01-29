@@ -21,20 +21,20 @@
       <div class="input-heading">Required:</div>
       <div class="input-container">
         <div class="input-label">Session duration (mins)</div>
-        <input type="text" name="duration">
+        <input type="number" name="duration" min="0" id="in-duration" required>
       </div>
       <div class="input-container">
         <div class="input-label">My easy pace (mins/km)</div>
-        <input type="text" name="easy-pace">
+        <input type="number" name="easy-pace" min="0" step="0.01" id="in-pace" required>
       </div>
       <div class="input-heading">Optional:</div>
       <div class="input-container">
         <div class="input-label">Distance (km)</div>
-        <input type="text" name="distance">
+        <input type="number" name="distance" min="0" step="0.01" id="in-distance">
       </div>
       <div class="input-container">
-        <div class="input-label">Intensity <i class="far fa-question-circle"></i></div>
-        <input type="text" name="intensity">
+        <div class="input-label">Intensity (1 to 10) <a href="images\RPE-scale.jpg" target="_blank"><i class="far fa-question-circle"></i></a></div>
+        <input type="number" name="intensity" min="1" max="10" id="in-intensity">
       </div>
       <div class="input-heading">Session Types:</div>
       <div class="check-option-container">
