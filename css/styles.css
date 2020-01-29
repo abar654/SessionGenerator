@@ -121,7 +121,7 @@ input[type=text] {
   padding: 10px 20px;
   margin-top: 15px;
 
-  background: var(--color-light-2);
+  background: var(--color-highlight);
   color: var(--color-dark-2);
 
   border-style: solid;
