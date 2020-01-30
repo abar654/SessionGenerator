@@ -66,6 +66,57 @@ a {
   align-items: stretch;
 }
 
+.session-container {
+  display: none;
+  flex-direction: column;
+
+  padding: 5px;
+  margin-bottom: 5px;
+
+  border-style: solid;
+  border-width: 2px;
+  border-color: var(--color-dark-2);
+  background: var(--color-highlight);
+}
+
+.session-heading {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 20px;
+  color: var(--color-dark-2);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.session-data-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px;
+  margin-bottom: 5px;
+
+  border-style: solid;
+  border-width: 2px;
+  border-color: var(--color-dark-2);
+  background: var(--color-light-1);
+}
+
+.session-data {
+  margin-right: 20px;
+}
+
+.session-description {
+  padding: 5px;
+  margin-bottom: 5px;
+
+  border-style: solid;
+  border-width: 2px;
+  border-color: var(--color-dark-2);
+  background: var(--color-light-1);
+}
+
+#again-button {
+  display: none;
+}
+
 .description-text {
   margin: auto;
   text-align: center;
@@ -172,6 +223,10 @@ input[type=number]:invalid {
     height: 30px;
   }
 
+  .input-form {
+    margin-top: 20px;
+  }
+
   .input-heading {
     font-size: 15px;
     margin-top: 10px;
@@ -180,6 +235,20 @@ input[type=number]:invalid {
 
   .check-option-container {
     align-self: stretch;
+  }
+
+}
+
+/* For really small phone screens */
+@media only screen and (max-width: 280px) {
+
+  .menu-title {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .menu-icon {
+    display: none;
   }
 
 }

@@ -61,6 +61,9 @@ function generate() {
   currentSessions = matchSessions(duration, pace, distance, intensity, sessionTypes);
 
   //Display the session
+  document.getElementById("generated-session").setAttribute("style", "display: flex;");
+  document.getElementById("again-button").setAttribute("style", "display: initial;");
+  document.getElementById("instruction-text").setAttribute("style", "display: none;");
 
 }
 

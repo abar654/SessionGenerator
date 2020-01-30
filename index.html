@@ -17,7 +17,18 @@
   <div class="generator-page-layout">
     <div class="side-panel"></div>
     <div class="input-form">
-      <div class="description-text"> Fill in as many details as you can about the style of session you would like to do</div>
+      <div class="session-container" id="generated-session">
+        <div class="session-heading">Your session:</div>
+        <div class="session-data-container">
+          <div class="session-data" id="sess-distance">Distance: </div>
+          <div class="session-data" id="sess-duration">Duration: </div>
+          <div class="session-data" id="sess-pace">Pace: </div>
+          <div class="session-data" id="sess-intensity">Intensity: </div>
+        </div>
+        <div class="session-description">Description goes here. You should feel this way, and you should do these things... </div>
+      </div>
+      <div class="action-button" id="again-button">SHOW ANOTHER</div>
+      <div class="description-text" id="instruction-text"> Fill in as many details as you can about the style of session you would like to do</div>
       <div class="input-heading">Required:</div>
       <div class="input-container">
         <div class="input-label">Session duration (mins)</div>
