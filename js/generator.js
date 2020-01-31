@@ -1,12 +1,11 @@
-import * as sessionFunctions from "sessions.js";
-
+import * as sessionFunctions from "./sessions.js";
 checkCheckboxes();
 document.getElementById("generate-button").onclick = generate;
 let currentSessions = [];
 
 function checkCheckboxes() {
   let inputs = document.getElementsByTagName("input");
-  for(input of inputs){
+  for(let input of inputs){
     if(input.type == "checkbox") {
       input.checked = true;
     }
@@ -24,7 +23,7 @@ function generate() {
   //Get the session types
   let sessionTypes = [];
   let inputs = document.getElementsByTagName("input");
-  for(input of inputs){
+  for(let input of inputs){
     if(input.type == "checkbox") {
       if(input.checked === true) {
         sessionTypes.push(input.value);
@@ -58,7 +57,7 @@ function generate() {
   //Check intensity, if none given then set to -1
   if(intensity == "") {
     intensity = -1;
-  } else if(intensity < 1 || intensity > 10 || !Number.isInteger(intensity)) {
+  } else if(intensity < 1 || intensity > 10) {
     document.getElementById("in-intensity").setAttribute("style", "border-color:var(--color-fail);");
     validInputs = false;
   }
@@ -68,12 +67,19 @@ function generate() {
     //Display the session-container
     document.getElementById("generated-session").setAttribute("style", "display: flex;");
     document.getElementById("again-button").setAttribute("style", "display: initial;");
-    document.getElementById("again-button").onclick = displayRandomSession();
+    document.getElementById("again-button").onclick = displayRandomSession;
     document.getElementById("instruction-text").setAttribute("style", "display: none;");
 
     //Generate the sessions, then get a session and display it
     currentSessions = matchSessions(duration, pace, distance, intensity, sessionTypes);
     displayRandomSession();
+
+  } else {
+
+    //Display an error message
+    let instructionText = document.getElementById("instruction-text");
+    instructionText.setAttribute("style", "color: var(--color-fail)");
+    instructionText.textContent = "Your inputs were invalid. Please check that your inputs match the required formats."
 
   }
 
@@ -105,7 +111,7 @@ function generateRegular(duration, pace, distance, intensity) {
   if(easy != null) {
     regularSessions.push(easy);
   }
-  
+
   //Generate normal
 
   //Genetate terrain
@@ -134,5 +140,18 @@ function generateThreshold(duration, pace, distance, intensity) {
 
 //Takes a random session from the currentSessions array and displays one.
 function displayRandomSession() {
+
+  //Get the session
+  let nextSession = currentSessions[0];
+
+  //Display the session
+  document.getElementById("sess-name-heading").textContent = nextSession["name"];
+  document.getElementById("sess-name").textContent = nextSession["name"];
+  document.getElementById("sess-type").textContent = nextSession["type"];
+  document.getElementById("sess-distance").textContent = nextSession["distance"] + "km";
+  document.getElementById("sess-duration").textContent = nextSession["duration"] + "mins";
+  document.getElementById("sess-pace").textContent = nextSession["pace"] + " mins/km";
+  document.getElementById("sess-intensity").textContent = nextSession["intensity"];
+  document.getElementById("sess-comment").textContent = nextSession["comment"];
 
 }

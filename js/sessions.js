@@ -1,6 +1,7 @@
 export function generateEasySession(duration, pace, distance, intensity) {
 
   let session = {};
+  intensity = parseInt(intensity);
 
   if(intensity == 2) {
     pace = pace * 1.1;

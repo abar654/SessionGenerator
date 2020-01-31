@@ -80,6 +80,8 @@ a {
 }
 
 .session-heading {
+  display: flex;
+  justify-content: space-between;
   font-family: 'Orbitron', sans-serif;
   font-size: 20px;
   color: var(--color-dark-2);
@@ -92,6 +94,7 @@ a {
   flex-wrap: wrap;
   padding: 5px;
   margin-bottom: 5px;
+  max-width: 400px;
 
   border-style: solid;
   border-width: 2px;
@@ -100,17 +103,33 @@ a {
 }
 
 .session-data {
-  margin-right: 20px;
+  display: flex;
+  margin-right: 15px;
+  line-height: 150%;
+}
+
+.data-label {
+  color: var(--color-dark-2);
+  margin-right: 10px;
+}
+
+#name-data {
+  display: none;
 }
 
 .session-description {
   padding: 5px;
-  margin-bottom: 5px;
+  max-width: 400px;
+  line-height: 120%;
 
   border-style: solid;
   border-width: 2px;
   border-color: var(--color-dark-2);
   background: var(--color-light-1);
+}
+
+#sess-description-title {
+  color: var(--color-dark-2);
 }
 
 #again-button {
@@ -221,6 +240,14 @@ input[type=number]:invalid {
 
   .menu-icon {
     height: 30px;
+  }
+
+  #sess-name-heading {
+    display: none;
+  }
+
+  #name-data {
+    display: flex;
   }
 
   .input-form {
