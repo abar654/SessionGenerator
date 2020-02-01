@@ -2,6 +2,7 @@ import * as sessionFunctions from "./sessions.js";
 checkCheckboxes();
 document.getElementById("generate-button").onclick = generate;
 let currentSessions = [];
+let currentDisplayedIndex = -1;
 
 function checkCheckboxes() {
   let inputs = document.getElementsByTagName("input");
@@ -66,6 +67,7 @@ function generate() {
 
     //Generate the sessions, then get a session and display it
     currentSessions = matchSessions(duration, pace, distance, intensity, sessionTypes);
+    currentDisplayedIndex = -1;
 
     if(currentSessions.length > 0) {
 
@@ -115,16 +117,20 @@ function matchSessions(duration, pace, distance, intensity, sessionTypes) {
   return newSessions;
 }
 
+function addSession(session, sessionsArray) {
+  if(session != null) {
+    sessionsArray.push(session);
+  }
+}
+
 function generateRegular(duration, pace, distance, intensity) {
   let regularSessions = [];
 
   //Generate easy
-  let easy = sessionFunctions.generateEasySession(duration, pace, distance, intensity);
-  if(easy != null) {
-    regularSessions.push(easy);
-  }
+  addSession(sessionFunctions.generateEasySession(duration, pace, distance, intensity), regularSessions);
 
   //Generate normal
+  addSession(sessionFunctions.generateNormalSession(duration, pace, distance, intensity), regularSessions);
 
   //Genetate terrain
 
@@ -153,8 +159,18 @@ function generateThreshold(duration, pace, distance, intensity) {
 //Takes a random session from the currentSessions array and displays one.
 function displayRandomSession() {
 
-  //Get the session
-  let nextSession = currentSessions[0];
+  //Get a session from the list at random
+  //Make sure it isn't the same session currently being displayed
+  let randomIndex = Math.floor(Math.random() * currentSessions.length);
+  if(currentSessions.length > 1 && randomIndex == currentDisplayedIndex) {
+    if(randomIndex == 0) {
+      randomIndex++;
+    } else {
+      randomIndex--;
+    }
+  }
+  currentDisplayedIndex = randomIndex;
+  let nextSession = currentSessions[randomIndex];
 
   //Display the session
   document.getElementById("sess-name-heading").textContent = nextSession["name"];
