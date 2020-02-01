@@ -64,21 +64,33 @@ function generate() {
 
   if(validInputs) {
 
-    //Display the session-container
-    document.getElementById("generated-session").setAttribute("style", "display: flex;");
-    document.getElementById("again-button").setAttribute("style", "display: initial;");
-    document.getElementById("again-button").onclick = displayRandomSession;
-    document.getElementById("instruction-text").setAttribute("style", "display: none;");
-
     //Generate the sessions, then get a session and display it
     currentSessions = matchSessions(duration, pace, distance, intensity, sessionTypes);
-    displayRandomSession();
+
+    if(currentSessions.length > 0) {
+
+      //Display the session-container
+      document.getElementById("generated-session").setAttribute("style", "display: flex;");
+      document.getElementById("again-button").setAttribute("style", "display: initial;");
+      document.getElementById("again-button").onclick = displayRandomSession;
+      document.getElementById("instruction-text").setAttribute("style", "display: none;");
+      document.getElementById("generate-button").textContent = "RE-GENERATE";
+
+      displayRandomSession();
+
+    } else {
+
+      //Show a message to let the user know that no sessions could be generated.
+      let instructionText = document.getElementById("instruction-text");
+      instructionText.setAttribute("style", "color: var(--color-fail); display: initial;");
+      instructionText.textContent = "No sessions could be generated. Your requirements may be too strict or conflicting. You may need to select other session types to meet your requirements."
+    }
 
   } else {
 
-    //Display an error message
+    //Display an error message that inputs were invalid
     let instructionText = document.getElementById("instruction-text");
-    instructionText.setAttribute("style", "color: var(--color-fail)");
+    instructionText.setAttribute("style", "color: var(--color-fail); display: initial;");
     instructionText.textContent = "Your inputs were invalid. Please check that your inputs match the required formats."
 
   }
@@ -148,9 +160,9 @@ function displayRandomSession() {
   document.getElementById("sess-name-heading").textContent = nextSession["name"];
   document.getElementById("sess-name").textContent = nextSession["name"];
   document.getElementById("sess-type").textContent = nextSession["type"];
-  document.getElementById("sess-distance").textContent = nextSession["distance"] + "km";
-  document.getElementById("sess-duration").textContent = nextSession["duration"] + "mins";
-  document.getElementById("sess-pace").textContent = nextSession["pace"] + " mins/km";
+  document.getElementById("sess-distance").textContent = parseFloat(nextSession["distance"]).toFixed(2) + "km";
+  document.getElementById("sess-duration").textContent = parseFloat(nextSession["duration"]).toFixed() + "mins";
+  document.getElementById("sess-pace").textContent = parseFloat(nextSession["pace"]).toFixed(2) + " mins/km";
   document.getElementById("sess-intensity").textContent = nextSession["intensity"];
   document.getElementById("sess-comment").textContent = nextSession["comment"];
 
