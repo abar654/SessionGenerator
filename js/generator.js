@@ -133,10 +133,13 @@ function generateRegular(duration, pace, distance, intensity) {
   addSession(sessionFunctions.generateNormalSession(duration, pace, distance, intensity), regularSessions);
 
   //Genetate terrain
+  addSession(sessionFunctions.generateTerrainSession(duration, pace, distance, intensity), regularSessions);
 
   //Generate long
+  addSession(sessionFunctions.generateLongSession(duration, pace, distance, intensity), regularSessions);
 
   //Generate progression run
+  addSession(sessionFunctions.generateProgressionSession(duration, pace, distance, intensity), regularSessions);
 
   return regularSessions;
 }
@@ -151,6 +154,23 @@ function generateIntervals(duration, pace, distance, intensity) {
 function generateThreshold(duration, pace, distance, intensity) {
   let thresholdSessions = [];
 
+  //Threshold run
+  addSession(sessionFunctions.generateThresholdRunSession(duration, pace, distance, intensity), thresholdSessions);
+
+  //Threshold intervals long
+  addSession(sessionFunctions.generateThresholdLongIntSession(duration, pace, distance, intensity), thresholdSessions);
+
+  //Threshold intervals short
+  addSession(sessionFunctions.generateThresholdShortIntSession(duration, pace, distance, intensity), thresholdSessions);
+
+  //Tempo run
+  addSession(sessionFunctions.generateTempoRunSession(duration, pace, distance, intensity), thresholdSessions);
+
+  //Tempo intervals long
+  addSession(sessionFunctions.generateTempoLongIntSession(duration, pace, distance, intensity), thresholdSessions);
+
+  //Tempo intervals short
+  addSession(sessionFunctions.generateTempoShortIntSession(duration, pace, distance, intensity), thresholdSessions);
 
   return thresholdSessions;
 }
@@ -178,8 +198,13 @@ function displayRandomSession() {
   document.getElementById("sess-type").textContent = nextSession["type"];
   document.getElementById("sess-distance").textContent = parseFloat(nextSession["distance"]).toFixed(2) + "km";
   document.getElementById("sess-duration").textContent = parseFloat(nextSession["duration"]).toFixed() + "mins";
-  document.getElementById("sess-pace").textContent = parseFloat(nextSession["pace"]).toFixed(2) + " mins/km";
   document.getElementById("sess-intensity").textContent = nextSession["intensity"];
   document.getElementById("sess-comment").textContent = nextSession["comment"];
+
+  if(isNaN(nextSession["pace"])) {
+    document.getElementById("sess-pace").textContent = nextSession["pace"];
+  } else {
+    document.getElementById("sess-pace").textContent = parseFloat(nextSession["pace"]).toFixed(2) + " mins/km";
+  }
 
 }
