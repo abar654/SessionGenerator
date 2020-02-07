@@ -147,6 +147,26 @@ function generateRegular(duration, pace, distance, intensity) {
 function generateIntervals(duration, pace, distance, intensity) {
   let intervalsSessions = [];
 
+  //Hill intervals
+  addSession(sessionFunctions.generateHillIntSession(duration, pace, distance, intensity), intervalsSessions);
+
+  //Mona Fartlek
+  addSession(sessionFunctions.generateMonaFartlekSession(duration, pace, distance, intensity), intervalsSessions);
+
+  //Pickups (Fartlek)
+  addSession(sessionFunctions.generatePickupsSession(duration, pace, distance, intensity), intervalsSessions);
+
+  //1000s
+
+  //800s
+
+  //400s
+
+  //Anaerobic
+
+  //The Rob
+
+  //Strava blog sessions
 
   return intervalsSessions;
 }
@@ -199,7 +219,7 @@ function displayRandomSession() {
   document.getElementById("sess-distance").textContent = parseFloat(nextSession["distance"]).toFixed(2) + "km";
   document.getElementById("sess-duration").textContent = parseFloat(nextSession["duration"]).toFixed() + "mins";
   document.getElementById("sess-intensity").textContent = nextSession["intensity"];
-  document.getElementById("sess-comment").textContent = nextSession["comment"];
+  document.getElementById("sess-comment").innerHTML = nextSession["comment"];
 
   if(isNaN(nextSession["pace"])) {
     document.getElementById("sess-pace").textContent = nextSession["pace"];

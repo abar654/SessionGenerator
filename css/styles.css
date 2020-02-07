@@ -130,6 +130,7 @@ a {
 
 #sess-description-title {
   color: var(--color-dark-2);
+  margin-bottom: 5px;
 }
 
 #again-button {
