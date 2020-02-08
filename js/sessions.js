@@ -580,3 +580,97 @@ export function generatePickupsSession(duration, pace, distance, intensity) {
   return session;
 
 }
+
+export function generate1000sSession(duration, pace, distance, intensity) {
+
+  let session = {};
+  intensity = parseInt(intensity);
+
+  //Decide on acceptable intensities, and paces for each
+  if(intensity >= 8 || intensity == -1) {
+    session["intensity"] = 8;
+  } else {
+    return null;
+  }
+
+  //Set the basic fields
+  session["type"] = "Intervals";
+  session["name"] = "1000s";
+  session["pace"] = pace * 0.67;
+
+  //Find the number of intervals
+  let repDistance = 1;
+  let repDuration = session["pace"] + 1;
+  let numReps = 0;
+
+  //Increase the number of reps so long as we don't go past the desired duration or distance
+  while(numReps * repDuration <= duration
+    && numReps * repDistance <= distance
+    && numReps <= 6) {
+    numReps++;
+  }
+
+  //Roll back one rep, as the last rep we added broke the condition
+  numReps--;
+
+  //Calculate the duration and Distance
+  session["duration"] = numReps * repDuration;
+  session["distance"] = numReps * repDistance;
+
+  //Check that this duration is appropriate for this session type
+  if(session["duration"] < 12 || session["duration"] > 28) {
+    return null;
+  }
+
+  session["comment"] = "Run " + numReps + " sets of 1000m at hard pace (aim for your 5km pace) with 1 minute rest between each. <br><br>During the intervals you should only be able to speak in monosyllables and feel as though you are hyperventilating, however, it still should not be an all out sprint. To make the session easier change the rests between each interval to 2 minutes or reduce the number of intervals.";
+
+  return session;
+
+}
+
+export function generate800sSession(duration, pace, distance, intensity) {
+
+  let session = {};
+  intensity = parseInt(intensity);
+
+  //Decide on acceptable intensities, and paces for each
+  if(intensity >= 8 || intensity == -1) {
+    session["intensity"] = 8;
+  } else {
+    return null;
+  }
+
+  //Set the basic fields
+  session["type"] = "Intervals";
+  session["name"] = "800s";
+  session["pace"] = pace * 0.67;
+
+  //Find the number of intervals
+  let repDistance = 0.8;
+  let repDuration = session["pace"]*repDistance + 1;
+  let numReps = 0;
+
+  //Increase the number of reps so long as we don't go past the desired duration or distance
+  while(numReps * repDuration <= duration
+    && numReps * repDistance <= distance
+    && numReps <= 10) {
+    numReps++;
+  }
+
+  //Roll back one rep, as the last rep we added broke the condition
+  numReps--;
+
+  //Calculate the duration and Distance
+  session["duration"] = numReps * repDuration;
+  session["distance"] = numReps * repDistance;
+
+  //Check that this duration is appropriate for this session type
+  if(session["duration"] < 12 || session["duration"] > 28) {
+    return null;
+  }
+
+  session["comment"] = "Run " + numReps + " sets of 800m at hard pace (aim for your 5km pace) with 1 minute rest between each. <br><br>During the intervals you should only be able to speak in monosyllables and feel as though you are hyperventilating, however, it still should not be an all out sprint. To make the session easier change the rests between each interval to 2 minutes or reduce the number of intervals.";
+
+  return session;
+
+}

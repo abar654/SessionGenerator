@@ -157,8 +157,10 @@ function generateIntervals(duration, pace, distance, intensity) {
   addSession(sessionFunctions.generatePickupsSession(duration, pace, distance, intensity), intervalsSessions);
 
   //1000s
+  addSession(sessionFunctions.generate1000sSession(duration, pace, distance, intensity), intervalsSessions);
 
   //800s
+  addSession(sessionFunctions.generate800sSession(duration, pace, distance, intensity), intervalsSessions);
 
   //400s
 
