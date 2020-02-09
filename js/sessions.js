@@ -510,7 +510,10 @@ export function generateMonaFartlekSession(duration, pace, distance, intensity) 
   intensity = parseInt(intensity);
 
   //Decide on acceptable intensities, and paces for each
-  if(intensity >= 7 || intensity == -1) {
+  if(intensity == 7) {
+    session["intensity"] = 7
+  }
+  if(intensity >= 8 || intensity == -1) {
     session["intensity"] = 8;
   } else {
     return null;
@@ -542,6 +545,9 @@ export function generatePickupsSession(duration, pace, distance, intensity) {
   intensity = parseInt(intensity);
 
   //Decide on acceptable intensities, and paces for each
+  if(intensity == 7) {
+    session["intensity"] = 7
+  }
   if(intensity >= 8 || intensity == -1) {
     session["intensity"] = 8;
   } else {

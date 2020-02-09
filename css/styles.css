@@ -21,6 +21,7 @@ body {
 
 a {
   color: var(--color-dark-1);
+  text-decoration: none;
 }
 
 .menu-bar {
@@ -36,6 +37,8 @@ a {
   margin-left: 10px;
   font-family: 'Orbitron', sans-serif;
   font-size: 30px;
+  white-space: nowrap;
+  color: var(--color-dark-2);
 }
 
 .menu-icon {
