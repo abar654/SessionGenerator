@@ -674,3 +674,114 @@ export function generate800sSession(duration, pace, distance, intensity) {
   return session;
 
 }
+
+export function generate400sSession(duration, pace, distance, intensity) {
+
+  let session = {};
+  intensity = parseInt(intensity);
+
+  //Decide on acceptable intensities, and paces for each
+  if(intensity >= 8 || intensity == -1) {
+    session["intensity"] = 8;
+  } else {
+    return null;
+  }
+
+  //Set the basic fields
+  session["type"] = "Intervals";
+  session["name"] = "400s";
+  session["pace"] = pace * 0.65;
+
+  //Find the number of intervals
+  let repDistance = 0.4;
+  let repDuration = session["pace"]*repDistance + 0.5;
+  let numReps = 0;
+
+  //Increase the number of reps so long as we don't go past the desired duration or distance
+  while(numReps * repDuration <= duration
+    && numReps * repDistance <= distance
+    && numReps <= 16) {
+    numReps++;
+  }
+
+  //Roll back one rep, as the last rep we added broke the condition
+  numReps--;
+
+  //Calculate the duration and Distance
+  session["duration"] = numReps * repDuration;
+  session["distance"] = numReps * repDistance;
+
+  //Check that this duration is appropriate for this session type
+  if(session["duration"] < 12 || session["duration"] > 28) {
+    return null;
+  }
+
+  session["comment"] = "Run " + numReps + " sets of 400m at hard pace (aim for your 3km pace) with 30 seconds rest between each. <br><br>During the intervals you should only be able to speak in monosyllables and feel as though you are hyperventilating. To make the session easier take a 3 minute rest half way through the intervals.";
+
+  return session;
+
+}
+
+export function generateAnaerobicSession(duration, pace, distance, intensity) {
+
+  let session = {};
+  intensity = parseInt(intensity);
+
+  //Decide on acceptable intensities, and paces for each
+  if(intensity >= 9 || intensity == -1) {
+    session["intensity"] = 9;
+  } else {
+    return null;
+  }
+
+  //Set the basic fields
+  session["type"] = "Intervals";
+  session["name"] = "Anaerobic Sprints";
+  session["pace"] = pace * 0.5;
+
+  //Calculate the duration and Distance
+  session["duration"] = 20;
+  session["distance"] = 6*0.1 + 3*0.15;
+
+  //Check that the duration and distance aren't too much
+  if(session["duration"] > duration || session["distance"] > distance) {
+    return null;
+  }
+
+  session["comment"] = "3 x 100m, 3 x 150m, 3 x 100m, with approximately 2 minutes rest between each sprint.<br><br>It is especially important to do a long warm up before this session (as with all intervals sessions) to reduce injury risk.<br><br>During the intervals you should be unable to speak and hyperventilating strongly. You should aim for your 100m to 400m competition pace.";
+
+  return session;
+
+}
+
+export function generateRobSession(duration, pace, distance, intensity) {
+
+  let session = {};
+  intensity = parseInt(intensity);
+
+  //Decide on acceptable intensities, and paces for each
+  if(intensity >= 9 || intensity == -1) {
+    session["intensity"] = 9;
+  } else {
+    return null;
+  }
+
+  //Set the basic fields
+  session["type"] = "Intervals";
+  session["name"] = "The Rob";
+  session["pace"] = pace * 0.5;
+
+  //Calculate the duration and Distance
+  session["duration"] = 6*4 + 8*2;
+  session["distance"] = 6*0.3 + 8*0.2;
+
+  //Check that the duration and distance aren't too much
+  if(session["duration"] > duration || session["distance"] > distance) {
+    return null;
+  }
+
+  session["comment"] = "6 x 300m with 3 minutes rest between each, 8 x 200m with 90 seconds rest between each.<br><br>It is especially important to do a long warm up before this session (as with all intervals sessions) to reduce injury risk.<br><br>This session, from one of the greatest coaches of all time, aims to build strength and speed without taxing your body too much (hence the long rests). During the intervals you should be unable to speak and hyperventilating strongly. You should aim for your 400m competition pace.";
+
+  return session;
+
+}

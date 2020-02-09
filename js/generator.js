@@ -163,12 +163,15 @@ function generateIntervals(duration, pace, distance, intensity) {
   addSession(sessionFunctions.generate800sSession(duration, pace, distance, intensity), intervalsSessions);
 
   //400s
+  addSession(sessionFunctions.generate400sSession(duration, pace, distance, intensity), intervalsSessions);
 
   //Anaerobic
+  addSession(sessionFunctions.generateAnaerobicSession(duration, pace, distance, intensity), intervalsSessions);
 
   //The Rob
+  addSession(sessionFunctions.generateRobSession(duration, pace, distance, intensity), intervalsSessions);
 
-  //Strava blog sessions
+  //Strava blog sessions... to add later
 
   return intervalsSessions;
 }
